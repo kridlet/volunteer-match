@@ -10,26 +10,27 @@ MySQL database is used to keep track of all members and opportunities.
 **************************** Technology *****************************
 
 Front end:
-    - HTML,
-    - CSS,
-    - Bootstrap 4.0,
-    - Font-awesome,
-    - jQuery,
-    - jQuery.easing
+- HTML
+- CSS
+- Bootstrap
+- Font-awesome
+- jQuery
+- jQuery.easing
 
 Back end:
-    - MySQL,
-    - Node.js,
-    - Express,
-    - Express-Handlebars,
-    - Body-Parser,
-    - chai npm,
-    - Sequelize,
-    - Passport,
-    - bcrypt-nodejs,
-    - Express-session
+- MySQL
+- Node.js
+- Express
+- Express-Handlebars
+- Body-Parser
+- chai npm
+- Sequelize
+- Passport
+- bcrypt-nodejs
+- Express-session
 
 **************************** Developers *****************************
 
 [Paula MacTavish](https://github.com/pmactavish13)
+
 [Dirk Wiggins](https://github.com/kridlet)
