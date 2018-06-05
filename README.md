@@ -1,53 +1,35 @@
-# volunteer
-A full-stack Philadelphia Volunteer app matching organizations to volunteers.  Designed using MVC (model view controller) pattern for efficient code reuse.
+## volunteer-match
+A full-stack Philadelphia Volunteer app matching organizations and volunteers. Designed using MVC (model view controller) pattern for efficient code reuse.
 
-The app opens to the sign-in section of the home page. 
+New users can join as Philadelphia Volunteers.
 
-New users can fill out a form to join Philadelphia Volunteer.  In this form, there is also survey to track any special skills and indoor/outdoor preference.
+After joining or logging in, the user is able to generate new volunteer opportunities, view/change their profile, or register for volunteer events. Users can filter volunteer opportunities according to specific skills required.  
 
-After joining or logging in, the user is taken to an privte page.  The nav bar gives the user the option of adding an opportunity of their own, viewing/changing their profile, viewing the events they have created or logging out.  A row of buttons below the nav bar allows the user to change the search criteria to see opportunities where certian skills are required or needed.  
-
-If the member chooses an opportunity to participate in, they can click on s button to sign-up for the opportunity.
-
-mySQL database is used to keep track of all members and opportunities.  Two tables, Member and Opportunity are linked with a belongsToMany relationship creating a third MemberOpportunity table that can be used to see which members signed up or created which events.
+MySQL database is used to keep track of all members and opportunities. 
 
 **************************** Technology *****************************
 
 Front end:
-    Start Bootstrap
-    HTML
-    CSS
-    Bootstrap 4.0    
+    +HTML,
+    +CSS,
+    +Bootstrap 4.0,
+    +Font-awesome,
+    +jQuery,
+    +jQuery.easing
 
 Back end:
-    MySQL database,
-    MySQL workbench,
-    Node.js,
-    Express npm,
-    Express-Handlebars npm,
-    Body-Parser npm,
-    Path npm,
-    chai npm,
-    mysql2 npm,
-    Sequelize npm,
-    Passport npm,
-    Passport-local npm,
-    bcrypt-nodejs npm,
-    Express-session npm
-    Bootstrap npm,
-    Font-awesome npm
-    jquery npm
-    jquery.easing npm
+    +MySQL,
+    +Node.js,
+    +Express,
+    +Express-Handlebars,
+    +Body-Parser,
+    +chai npm,
+    +Sequelize,
+    +Passport,
+    +bcrypt-nodejs,
+    +Express-session
 
 **************************** Developers *****************************
 
-Anthony Elliot
-
-Paula MacTavish
-
-Alexa Stefanou 
-
-Dirk Wiggins           
-
-
-
+[Paula MacTavish] (https://github.com/pmactavish13)
+[Dirk Wiggins] (https://github.com/kridlet)
