@@ -1,4 +1,4 @@
-## volunteer-match
+# volunteer-match
 A full-stack Philadelphia Volunteer app matching organizations and volunteers. Designed using MVC (model view controller) pattern for efficient code reuse.
 
 New users can join as Philadelphia Volunteers.
@@ -7,9 +7,9 @@ After joining or logging in, the user is able to generate new volunteer opportun
 
 MySQL database is used to keep track of all members and opportunities. 
 
-**************************** Technology *****************************
+## technology
 
-Front end:
+### front end
 - HTML
 - CSS
 - Bootstrap
@@ -17,7 +17,7 @@ Front end:
 - jQuery
 - jQuery.easing
 
-Back end:
+### back end
 - MySQL
 - Node.js
 - Express
@@ -29,7 +29,7 @@ Back end:
 - bcrypt-nodejs
 - Express-session
 
-**************************** Developers *****************************
+## contributors
 
 [Paula MacTavish](https://github.com/pmactavish13)
 
