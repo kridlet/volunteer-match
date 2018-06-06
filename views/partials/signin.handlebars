@@ -1,0 +1,41 @@
+<!-- Modal -->
+<div id="loginModal" class="modal fade" data-id="modalLogIn" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" id="login">
+            <div class="modal-header">
+                <h4 class="modal-title">Volunteer Log In</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form id="signin" name="signin">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input class="form-control" id="email" name="email" type="email" placeholder="Your Email *" onfocus="this.placeholder=''">
+                                        <input class="form-control" id="password" name="password" type="password" placeholder="Your Password *" onfocus="this.placeholder=''">
+                                    </div>
+                                </div>
+                                <div class="message" style="color:red;"></div>
+                                <div class="col-lg-6 text-center">
+                                    <input class="btn btn-primary btn-xl text-uppercase" type="submit" value="Log In" />
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-6 text-center">
+
+                                    <a data-toggle="modal" href="#newMemberModal">Not a member? Sign up!</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>

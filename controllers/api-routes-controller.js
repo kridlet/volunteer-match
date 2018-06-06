@@ -9,7 +9,7 @@ var db = require("../models");
 
 module.exports = function (app, passport) {
 
-  // register signin route loads new_members.handlebars
+  // register signin route loads members.handlebars
   app.post('/api/signup',
     passport.authenticate('local-signup', {
       failWithError: true
@@ -42,19 +42,19 @@ module.exports = function (app, passport) {
       sales: req.body.sales,
       teaching: req.body.teaching,
     };
-      db.Member.update(data, {
-          where: {
-            id: req.user.id
-          },
-          returning: true,
-          plain: true
-        })
-        .then(function (result) {
-          res.status(200).send({
-            redirectTo: '/private'
-          });
+    db.Member.update(data, {
+        where: {
+          id: req.user.id
+        },
+        returning: true,
+        plain: true
+      })
+      .then(function (result) {
+        res.status(200).send({
+          redirectTo: '/private'
         });
-    });
+      });
+  });
 
   app.post(
     '/api/signin',
@@ -72,30 +72,41 @@ module.exports = function (app, passport) {
 
   // route loads private.handlebars
   app.get("/private", isLoggedIn, function (req, res) {
-    
-    console.log(req.query);
 
-    let searchFilter = req.query.skillsSearch || []
-    
+    var myOpportunitiesFilter = req.query.myEvents || '';
+    if (myOpportunitiesFilter == 'true') {
+      opportunities = {
+        model: db.Member,
+        where: {
+          id: req.user.id
+        },
+      };
+      myEvents = true;
+    } else {
+      opportunities = {
+        model: db.Member,
+      };
+      myEvents = false;
+    }
+
+    var searchFilter = req.query.skillsSearch || [];
+
     if (typeof searchFilter === 'string')
       searchFilter = [searchFilter]
 
-    const filter = searchFilter.reduce( (acc, keyname) => {
+    const filter = searchFilter.reduce((acc, keyname) => {
       if (['Inside', 'Outside'].includes(keyname))
-        acc['opportunity_inOrOut'] =  acc['opportunity_inOrOut'] ? 'Both': keyname
+        acc['opportunity_inOrOut'] = acc['opportunity_inOrOut'] ? 'Both' : keyname;
       else
-        acc[keyname] = true
+        acc[keyname] = true;
       return acc;
-    }, {})
-    console.log(filter)
+    }, {});
     db.Opportunity.findAll({
       where: filter,
-      include: {
-        model: db.Member,
-      }
+      include: opportunities,
     }).then(function (DbOpporunities) {
-      var allOpportunities =[];
-      for (i=0; i<DbOpporunities.length; i++) {
+      var allOpportunities = [];
+      for (i = 0; i < DbOpporunities.length; i++) {
         var newOpportunity = {
           id: DbOpporunities[i].id,
           opportunity_name: DbOpporunities[i].opportunity_name,
@@ -109,11 +120,11 @@ module.exports = function (app, passport) {
           organization_zip: DbOpporunities[i].organization_zip,
           opportunity_photo_Url: DbOpporunities[i].opportunity_photo_Url,
         };
-        for (j=0; j<DbOpporunities[i].Members.length; j++) {
+        newOpportunity.registered = false;
+        for (j = 0; j < DbOpporunities[i].Members.length; j++) {
           if (DbOpporunities[i].Members[j].id == req.user.id) {
-            newOpportunity.registered=true;
-          } else {
-            newOpportunity.registered=false;
+            newOpportunity.registered = true;
+            break;
           }
         }
         allOpportunities.push(newOpportunity);
@@ -151,55 +162,38 @@ module.exports = function (app, passport) {
         },
         opportunityData: {
           opportunities: allOpportunities,
+        },
+        settingData: {
+          loggedIn: true,
+          myEvents: myEvents,
         }
       };
+
       res.render(path.join(__dirname, "../views/private.handlebars"), handlebarsData);
       //res.json(allOpportunities);
     });
   });
 
-  app.get("/myEvents", isLoggedIn, function(req, res) {
-    db.Opportunity.findAll({
-      include: {
-        model: db.Member,
-        where: {
-          id: req.user.id
-        }
-      }
-    }).then( opportunities => {
-      const handlebarsData = {
-        opportunityData: {
-          opportunities
-        }
-      }
-      console.log(handlebarsData)
-      res.render(path.join(__dirname, "../views/my_events.handlebars"), handlebarsData);
-    })
-    
-  })
-
-  // new_opportunities route loads new_opportunities.handlebars
-  app.get("/new_opportunities", isLoggedIn, function (req, res) {
-    res.render(path.join(__dirname, "../views/new_opportunities.handlebars"));
+  // opportunities route loads opportunities.handlebars
+  app.get("/opportunities", isLoggedIn, function (req, res) {
+    res.render(path.join(__dirname, "../views/opportunities.handlebars"));
   });
 
-  app.post('/api/new_opportunities', isLoggedIn, function (req, res) {
+  app.post('/api/opportunities', isLoggedIn, function (req, res) {
     db.Opportunity.create(req.body).then(function (dbOpportunity) {
       if (!dbOpportunity) {
         res.status(500).send("unable to create new event");
       }
       if (dbOpportunity) {
-        res.status(200).send({ redirectTo: '/private' });
+        res.status(200).send({
+          redirectTo: '/private'
+        });
       }
     });
   });
 
   app.post('/api/unenroll/:id', isLoggedIn, function (req, res) {
-    newMemberOpportunity = {
-      MemberId: req.user.id,
-      OpportunityId: parseInt(req.params.id)
-    };
-
+    console.log('\n\n\n\nremove api hit\n\n\n\n');
     db.Member.findOne({
       where: {
         id: req.user.id
@@ -217,11 +211,6 @@ module.exports = function (app, passport) {
   });
 
   app.post('/api/register/:id', isLoggedIn, function (req, res) {
-    newMemberOpportunity = {
-      MemberId: req.user.id,
-      OpportunityId: parseInt(req.params.id)
-    };
-
     db.Member.findOne({
       where: {
         id: req.user.id
@@ -250,5 +239,4 @@ module.exports = function (app, passport) {
       return next();
     res.redirect('/');
   }
-
-}
+};

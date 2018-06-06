@@ -6,12 +6,10 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var enrollFunc = $(this).data("register");
         event.preventDefault();
-
-        if (enrollFunc == 'true') {
+        if (enrollFunc == true) {
             $.ajax("/api/unenroll/" + id, {
                 type: "POST",
             }).then(function (response) {
-                console.log(id);
                 // Reload the page to get the updated list
                 location.reload();
             });
@@ -19,7 +17,6 @@ $(document).ready(function () {
             $.ajax("/api/register/" + id, {
                 type: "POST",
             }).then(function (response) {
-                console.log(id);
                 // Reload the page to get the updated list
                 location.reload();
             });

@@ -46,10 +46,12 @@ module.exports = function (app) {
         },
         opportunityData: {
           opportunities: dbOpportunity,
+        },
+        settingData: {
+          loggedIn: false,
         }
       };
       res.render(path.join(__dirname, "../views/home.handlebars"), handlebarsData);
     });
   });
-
 };

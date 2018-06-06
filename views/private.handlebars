@@ -1,30 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: rgb(19, 18, 18)">
-    <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Volunteer Events</a>
-        
-        <div>
-        {{!-- class="collapse navbar-collapse" id="navbarResponsive"> --}}
-            <ul class="navbar-nav text-uppercase ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/new_opportunities">Post New Event</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" data-toggle="modal" data-target="#newMemberModal">Member Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/myEvents">My Events</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/logout">Log Out</a>
-                </li>
+{{#with settingData}} {{> nav}} {{/with}}
 
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<section class="bg-light" id="portfolio">
-    <div class="container">
+<section class="bg-light">
+    <div class="container filter-buttons">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading text-uppercase" style="font-size:30px">Volunteer Opportunities</h2>
@@ -32,7 +9,6 @@
         </div>
 
         {{!-- search buttons --}}
-        <div></div>
         <form id="search" action="private" method="GET">
             <div class="ck-button">
                 <label class="skillsLabel">
@@ -109,7 +85,7 @@
             <div class="ck-button">
                 <label class="skillsLabel">
                     <input class="skillsInput" name="skillsSearch" type="checkbox" value="fundRaising">
-                    <span>Fund Raising</span>
+                    <span>Fundraising</span>
                 </label>
             </div>
             <div class="ck-button">
@@ -118,36 +94,23 @@
                     <span>Programming</span>
                 </label>
             </div>
-            <button class="ck-button" type="submit" style="color:#fed136; background-color:rgb(18, 17, 17)">Submit</button>
+            <button class="ck-button" type="submit" style="color:#fed136; background-color:rgb(22, 25, 29)">Filter</button>
             <div class="message" style="color:red;"></div>
         </form>
     </div>
-
-    <div class="row" style="clear: both; padding-top: 20px;">
-        {{#each opportunityData.opportunities}}
-            {{> opportunity}}
-        {{/each}}
-    </div>
-
 </section>
 
-<!-- Footer -->
-<footer style="background-color: #fed136; max height 50px;">
+<section class="bg-light" id="portfolio">
+    <p class="section-heading">&nbsp;</p>
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <span class="copyright">Copyright &copy; Philadelphhia Volunteer 2018</span>
-            </div>
-            <div class="col-md-1">
-            </div>
-            <div class="col-md-7">
-                <p style="color: black; font-weight:300">Developers: Anthony Elliot / Paula MacTavish / Alexa Stefanou / Dirk Wiggins</p>
-            </div>
+            {{#each opportunityData.opportunities}}
+                {{> opportunity}} {{> button-auth}}
+            {{/each}}
         </div>
     </div>
-</footer>
+</section>
 
 
-<!-- Start New Member Modal -->
-{{#with formData}} {{> new-member}} {{/with}}
-<!-- End New Member Modal -->
+<!-- member profile modal -->
+{{#with formData}} {{> member}} {{/with}} {{> footer}}
