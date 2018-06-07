@@ -2,6 +2,10 @@
   "name": "volunteer",
   "version": "1.0.0",
   "description": "A Philadelphia Volunteer app matching organizations to volunteers.",
+  "engines": {
+    "node": "10.3.x",
+    "npm": "6.1.x"
+  },
   "main": "/",
   "scripts": {
     "start": "node server.js",
